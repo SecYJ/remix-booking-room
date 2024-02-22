@@ -2,7 +2,7 @@ import DotDeco from "public/assets/mobile/dot.png";
 
 const About = () => {
     return (
-        <section className="relative pb-24 pt-20">
+        <section className="relative pt-20">
             <img
                 className="absolute -top-1/4 left-6 size-[100px]"
                 src={DotDeco}
