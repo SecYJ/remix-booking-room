@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import Autoplay from "embla-carousel-autoplay";
 import useEmblaCarousel from "embla-carousel-react";
 import chevronLeftIcon from "public/assets/chevronLeft.svg";
@@ -14,17 +15,16 @@ import { cn } from "utils/cn";
 const imageSlides = [room1, room2, room3, room4, room5];
 
 const ShowroomBanner = () => {
-    const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [
-        Autoplay({ delay: 3000 }),
+    const [selectedIndex, setSelectedIndex] = useState(0);
+    const [emblaRef, embla] = useEmblaCarousel({ loop: true }, [
+        Autoplay({ delay: 3000, stopOnInteraction: false, playOnInit: false }),
     ]);
-    // const onInit = useCallback((emblaApi: UseEmblaCarouselType[1]) => {
-    //     if (emblaApi) setScrollSnaps(emblaApi?.scrollSnapList());
-    // }, []);
 
-    // useEffect(() => {
-    //     if (!emblaApi) return;
-    //     emblaApi.on("reInit", onInit);
-    // }, [emblaApi, onInit]);
+    useEffect(() => {
+        if (!embla) return;
+
+        embla.on("select", (e) => setSelectedIndex(e.selectedScrollSnap()));
+    }, [embla]);
 
     return (
         <section className="relative pb-[100px] pt-[200px]">
@@ -37,18 +37,17 @@ const ShowroomBanner = () => {
 
                 {/* dot */}
                 <div className="absolute bottom-4 left-1/2 flex -translate-x-1/2 gap-2">
-                    <div className="" />
                     {imageSlides.map((_, index) => (
                         <button
                             type="button"
                             key={index}
                             className={cn(
                                 "h-1 rounded-full",
-                                emblaApi?.selectedScrollSnap() === index
+                                selectedIndex === index
                                     ? "w-15 bg-primary-100"
                                     : "w-8 bg-primary-40",
                             )}
-                            onClick={() => emblaApi?.scrollTo(index)}
+                            onClick={() => embla?.scrollTo(index)}
                         />
                     ))}
                 </div>
