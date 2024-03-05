@@ -26,6 +26,8 @@ const ShowroomBanner = () => {
         const firstSlide = selectedIndex === 0;
         const lastSlide = selectedIndex === imageSlides.length - 1;
 
+        embla?.reInit();
+
         if (direction === "prev") {
             const index = firstSlide
                 ? imageSlides.length - 1
@@ -57,7 +59,7 @@ const ShowroomBanner = () => {
                 alt="deco line"
             />
 
-            <div className="relative overflow-hidden" ref={emblaRef}>
+            <div className="relative z-[1] overflow-hidden" ref={emblaRef}>
                 <div className="flex *:min-h-[300px] *:w-full *:shrink-0">
                     {imageSlides.map((src) => (
                         <img key={src} src={src} alt="" />
@@ -82,7 +84,7 @@ const ShowroomBanner = () => {
                 </div>
             </div>
 
-            <div className="relative grid content-end px-3 font-bold lg:px-0">
+            <div className="relative z-[1] grid content-end px-3 font-bold lg:px-0">
                 <img
                     src={decoLineDesktop}
                     className="absolute left-0 top-20 hidden w-[calc(100%+5rem)] -translate-x-20 lg:block"
