@@ -2,7 +2,7 @@ import { createPortal } from "react-dom";
 import { NavLink } from "@remix-run/react";
 import { navigationLinks } from "./constant";
 import { cn } from "utils/cn";
-import closeIcon from "public/assets/close.svg";
+import CloseIcon from "~/icons/close.svg?react";
 
 interface Props {
     onClose: () => void;
@@ -16,7 +16,7 @@ const MobileNavMenu = ({ onClose }: Props) => {
                 className="absolute right-10 top-10"
                 onClick={() => onClose()}
             >
-                <img src={closeIcon} alt="close nav menu" />
+                <CloseIcon />
                 <div className="sr-only">close navigation menu</div>
             </button>
             <nav>

@@ -1,11 +1,9 @@
-import DotDeco from "public/assets/mobile/dot.png";
-
 const About = () => {
     return (
         <section className="relative pt-20">
             <img
                 className="absolute -top-1/4 left-6 size-[100px]"
-                src={DotDeco}
+                src="/assets/mobile/dot.png"
                 alt="dot deco"
             />
             <div className="relative min-h-[600px] bg-[url('/assets/mobile/about.png')] bg-cover bg-center lg:bg-[url('/assets/desktop/about.png')]">

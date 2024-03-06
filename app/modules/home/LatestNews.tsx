@@ -1,13 +1,10 @@
-import mobileNews1 from "public/assets/mobile/news1.png";
-import desktopNews1 from "public/assets/desktop/news1.png";
-import decoDot from "public/assets/mobile/dot.png";
 import { newsData } from "./data";
 
 const LatestNews = () => {
     return (
         <section className="relative mt-10 bg-primary-10 py-20">
             <img
-                src={decoDot}
+                src="/assets/mobile/dot.png"
                 className="absolute right-6 top-10 size-[100px] lg:top-[100px]"
                 alt=""
             />
@@ -24,14 +21,14 @@ const LatestNews = () => {
                                 <picture className="shrink-0">
                                     <source
                                         media="(min-width: 1024px)"
-                                        srcSet={desktopNews1}
+                                        srcSet="/assets/desktop/news1.png"
                                     />
                                     <source
                                         media="(max-width: 1023px)"
-                                        srcSet={mobileNews1}
+                                        srcSet="/assets/mobile/news1.png"
                                     />
                                     <img
-                                        src={mobileNews1}
+                                        src="/assets/mobile/news1.png"
                                         alt="beautiful view"
                                         className="w-full rounded-lg lg:w-[474px]"
                                     />

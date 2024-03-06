@@ -1,16 +1,15 @@
 import useEmblaCarousel from "embla-carousel-react";
 import { cuisineData } from "./data";
-import line from "public/assets/desktop/line.png";
 
 const Cuisine = () => {
     const [emblaRef] = useEmblaCarousel();
 
     return (
-        <section className="lg:py-30 bg-primary-10 py-20">
+        <section className="bg-primary-10 py-20 lg:py-30">
             <div className="container relative">
                 <img
                     className="absolute bottom-0 left-0 hidden h-full -translate-x-[5.25rem] translate-y-14 lg:block"
-                    src={line}
+                    src="/assets/desktop/line.png"
                     alt="line"
                 />
                 <div className="mb-10 flex items-center gap-10 lg:mb-20">

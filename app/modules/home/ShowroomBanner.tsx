@@ -1,20 +1,17 @@
 import { useEffect, useState } from "react";
 import Autoplay from "embla-carousel-autoplay";
 import useEmblaCarousel from "embla-carousel-react";
-import chevronLeftIcon from "public/assets/chevronLeft.svg";
-import chevronRightIcon from "public/assets/chevronRight.svg";
-import desktopBg from "public/assets/desktop/bg.png";
-import mobileBg from "public/assets/mobile/bg.png";
-import decoLineMobile from "public/assets/mobile/line.png";
-import decoLineDesktop from "public/assets/desktop/line2.png";
-import room1 from "public/assets/mobile/room1.png";
-import room2 from "public/assets/mobile/room2-1.png";
-import room3 from "public/assets/mobile/room2-2.png";
-import room4 from "public/assets/mobile/room2-3.png";
-import room5 from "public/assets/mobile/room2-4.png";
+import ChevronLeftIcon from "~/icons/chevronLeft.svg?react";
+import ChevronRightIcon from "~/icons/chevronRight.svg?react";
 import { cn } from "utils/cn";
 
-const imageSlides = [room1, room2, room3, room4, room5];
+const imageSlides = [
+    "/assets/mobile/room1.png",
+    "/assets/mobile/room2-1.png",
+    "/assets/mobile/room2-2.png",
+    "/assets/mobile/room2-3.png",
+    "/assets/mobile/room2-4.png",
+];
 
 const ShowroomBanner = () => {
     const [selectedIndex, setSelectedIndex] = useState(0);
@@ -55,7 +52,7 @@ const ShowroomBanner = () => {
             {/* NOTE: for mobile only */}
             <img
                 className="absolute -right-20 top-24 h-20 lg:hidden"
-                src={decoLineMobile}
+                src="/assets/mobile/line.png"
                 alt="deco line"
             />
 
@@ -86,7 +83,7 @@ const ShowroomBanner = () => {
 
             <div className="relative z-[1] grid content-end px-3 font-bold lg:px-0">
                 <img
-                    src={decoLineDesktop}
+                    src="/assets/desktop/line2.png"
                     className="absolute left-0 top-20 hidden w-[calc(100%+5rem)] -translate-x-20 lg:block"
                     alt="deco line"
                 />
@@ -111,18 +108,24 @@ const ShowroomBanner = () => {
                 </button>
                 <div className="mt-11 flex justify-end gap-10">
                     <button type="button" onClick={() => onSlideChange("prev")}>
-                        <img src={chevronLeftIcon} alt="chevron left" />
+                        <ChevronLeftIcon />
                     </button>
                     <button type="button" onClick={() => onSlideChange("next")}>
-                        <img src={chevronRightIcon} alt="chevron left" />
+                        <ChevronRightIcon />
                     </button>
                 </div>
             </div>
 
             <picture className="absolute bottom-0">
-                <source media="(min-width: 1024px)" srcSet={desktopBg} />
-                <source media="(max-width: 1023px)" srcSet={mobileBg} />
-                <img src={mobileBg} alt="showroom banner" />
+                <source
+                    media="(min-width: 1024px)"
+                    srcSet="/assets/desktop/bg.png"
+                />
+                <source
+                    media="(max-width: 1023px)"
+                    srcSet="/assets/mobile/bg.png"
+                />
+                <img src="/assets/mobile/bg.png" alt="showroom banner" />
             </picture>
         </section>
     );

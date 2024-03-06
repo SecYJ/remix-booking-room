@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Link } from "@remix-run/react";
-import headerName from "public/assets/hotelName.svg";
-import headerSlogan from "public/assets/hotelSlogan.svg";
-import hamburger from "public/assets/hamburger.svg";
+import HeaderNameIcon from "~/icons/hotelName.svg?react";
+import HeaderSlogan from "~/icons/hotelSlogan.svg?react";
+import hamburger from "~/icons/hamburger.svg";
 import { MobileNavMenu } from "~/components";
 
 const Header = () => {
@@ -12,8 +12,8 @@ const Header = () => {
         <>
             <header className="container fixed left-0 right-0 top-0 z-10 mb-8 flex justify-between py-4">
                 <Link to="/">
-                    <img src={headerName} alt="" />
-                    <img src={headerSlogan} alt="" />
+                    <HeaderNameIcon />
+                    <HeaderSlogan />
                 </Link>
                 <button type="button" onClick={() => setMenuVisible(true)}>
                     <img src={hamburger} alt="" />

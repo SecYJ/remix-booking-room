@@ -1,11 +1,7 @@
-import mapMobile from "public/assets/mobile/map.png";
-import mapDesktop from "public/assets/desktop/map.png";
+import { cloneElement } from "react";
 import { FaCar } from "react-icons/fa6";
 import { IoMdTrain } from "react-icons/io";
 import { FaCarSide } from "react-icons/fa";
-import { cloneElement } from "react";
-import lineMobile from "public/assets/mobile/line.png";
-import lineDesktop from "public/assets/desktop/line3.png";
 
 const data = [
     {
@@ -47,10 +43,10 @@ const Traffic = () => {
                     <picture>
                         <source
                             media="(min-width: 1024px)"
-                            srcSet={mapDesktop}
+                            srcSet="/assets/desktop/map.png"
                         />
                         <img
-                            src={mapMobile}
+                            src="/assets/mobile/map.png"
                             alt="Google Map"
                             className="w-full"
                         />
@@ -72,11 +68,14 @@ const Traffic = () => {
             </div>
 
             <picture>
-                <source media="(min-width: 1024px)" src={lineDesktop} />
+                <source
+                    media="(min-width: 1024px)"
+                    src="/assets/desktop/line3.png"
+                />
                 <img
-                    src={lineMobile}
+                    src="/assets/mobile/line.png"
                     alt="Line"
-                    className="h-21 mt-10 w-full lg:mt-20"
+                    className="mt-10 h-21 w-full lg:mt-20"
                 />
             </picture>
         </section>

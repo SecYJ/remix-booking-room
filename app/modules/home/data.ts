@@ -1,9 +1,3 @@
-import food1 from "public/assets/mobile/food1.png";
-import food2 from "public/assets/mobile/food2.png";
-import food3 from "public/assets/mobile/food3.png";
-import food4 from "public/assets/mobile/food4.png";
-import food5 from "public/assets/mobile/food5.png";
-
 export const newsData = [
     {
         title: "秋季旅遊，豪華享受方案",
@@ -24,7 +18,7 @@ export const newsData = [
 
 export const cuisineData = [
     {
-        img: food1,
+        img: "/assets/mobile/food1.png",
         name: "海霸",
         availableDay: "SUN-MON",
         availableTime: "11:00-20:30",
@@ -32,7 +26,7 @@ export const cuisineData = [
             "以新鮮海產料理聞名, 我們的專業廚師選用高雄當地的海鮮, 每一道菜都充滿海洋的鮮美與清甜。無論是烤魚、蒸蝦還是煮蛤蜊, 都能讓您品嚐到最新鮮的海洋風味。",
     },
     {
-        img: food2,
+        img: "/assets/mobile/food2.png",
         name: "日食",
         availableDay: "SUN-MON",
         availableTime: "17:00-22:00",
@@ -40,7 +34,7 @@ export const cuisineData = [
             "為您提供優質的牛排，每一塊肉都來自頂級的牛肉，經過專業廚師的巧手烹調，口感豐滿、風味絕佳。搭配我們的特製醬料，讓您的味蕾享受一場美味的盛宴。",
     },
     {
-        img: food3,
+        img: "/assets/mobile/food3.png",
         name: "山臻",
         availbleDay: "SUN-MON",
         availableTime: "11:30-20:30",
@@ -48,7 +42,7 @@ export const cuisineData = [
             "帶您進入一次辣味與鮮香兼具的川菜美食之旅。我們的廚師掌握正宗的川菜烹調技巧，從麻辣鍋到口水雞，每一道菜都有其獨特的風味，讓您回味無窮。",
     },
     {
-        img: food4,
+        img: "/assets/mobile/food4.png",
         name: "月永",
         availableDay: "SUN-MON",
         availableTime: "11:00-20:00",
@@ -56,7 +50,7 @@ export const cuisineData = [
             "從鮮美的海鮮、經典的牛排，到各國的特色美食，我們都一應俱全。在這裡，您可以品嚐到世界各地的美食，每一道菜都由專業廚師用心製作，讓您在享受美食的同時，也能感受到我們的熱情與用心。",
     },
     {
-        img: food5,
+        img: "/assets/mobile/food5.png",
         name: "天潮",
         availableDay: "SUN-MON",
         availableTime: "14:00-19:30",

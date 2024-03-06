@@ -1,13 +1,17 @@
-import mobileBanner1 from "public/assets/mobile/banner.png";
-import desktopBanner1 from "public/assets/desktop/banner.png";
-
 const Banner = () => {
     return (
         <section className="relative h-screen">
             <picture>
-                <source media="(min-width: 1024px)" srcSet={desktopBanner1} />
-                <source srcSet={mobileBanner1} />
-                <img src={mobileBanner1} className="opacity-80" alt="" />
+                <source
+                    media="(min-width: 1024px)"
+                    srcSet="/assets/desktop/banner.png"
+                />
+                <source srcSet="/assets/mobile/banner.png" />
+                <img
+                    src="/assets/mobile/banner.png"
+                    className="opacity-80"
+                    alt=""
+                />
             </picture>
 
             <div className="absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 flex-col gap-10 lg:flex-row lg:items-center lg:justify-center lg:gap-[152px]">

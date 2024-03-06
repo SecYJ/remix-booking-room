@@ -13,7 +13,9 @@ export default defineConfig({
             },
         }),
         tsconfigPaths(),
-        svgr(),
+        svgr({
+            include: "**/*.svg?react",
+        }),
     ],
     server: {
         port: 8080,

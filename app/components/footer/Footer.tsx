@@ -1,4 +1,3 @@
-import logo from "public/assets/desktop/logo.png";
 import { FaInstagram } from "react-icons/fa6";
 import { FaLine } from "react-icons/fa";
 
@@ -9,7 +8,7 @@ const data = [
     },
     {
         label: "FAX",
-        value: "+886-7-1234567",
+        value: "+886-7-1234568",
     },
     {
         label: "MAIL",
@@ -27,7 +26,7 @@ const Footer = () => {
             <div className="container">
                 <div className="grid grid-cols-1 gap-10 lg:grid-cols-[1fr_auto]">
                     <img
-                        src={logo}
+                        src="/assets/desktop/logo.png"
                         className="h-18"
                         alt="Enjoyment Luxury Hotel"
                     />

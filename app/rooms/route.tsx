@@ -1,10 +1,10 @@
 import useEmblaCarousel from "embla-carousel-react";
 
-import rightArrow from "public/assets/right-arrow.svg";
-import squareMeter from "public/assets/squareMeter.svg";
-import bed from "public/assets/bed.svg";
-import person from "public/assets/person.svg";
-import room from "public/assets/room.svg";
+import RightArrowIcon from "~/icons/right-arrow.svg?react";
+import SquareMeterIcon from "~/icons/squareMeter.svg?react";
+import BedIcon from "~/icons/bed.svg?react";
+import PersonIcon from "~/icons/person.svg?react";
+import RoomIcon from "~/icons/room.svg?react";
 
 const RoomPage = () => {
     const [emblaRef] = useEmblaCarousel();
@@ -25,7 +25,7 @@ const RoomPage = () => {
                     {/* <div className="embla overflow-hidden" ref={emblaRef}> */}
                     <div className="embla__container flex *:min-w-0 *:shrink-0 *:basis-full">
                         <div className="embla__slide">
-                            <img src={room} className="w-full" alt="" />
+                            <RoomIcon className="w-full" />
                         </div>
                         <div className="embla__slide">Slide 2</div>
                         <div className="embla__slide">Slide 3</div>
@@ -45,19 +45,19 @@ const RoomPage = () => {
 
                         <ul className="*rounded-lg *:border-primary grid grid-cols-3 gap-4 *:border *:p-4">
                             <li>
-                                <img src={squareMeter} alt="square meter" />
+                                <SquareMeterIcon />
                                 <p className="mt-2 text-sm font-bold text-neutral-80">
                                     24坪
                                 </p>
                             </li>
                             <li>
-                                <img src={bed} alt="bed" />
+                                <BedIcon />
                                 <p className="mt-2 text-sm font-bold text-neutral-80">
                                     1 張大床
                                 </p>
                             </li>
                             <li>
-                                <img src={person} alt="person" />
+                                <PersonIcon />
                                 <p className="mt-2 text-sm font-bold text-neutral-80">
                                     2-4 人
                                 </p>
@@ -71,7 +71,7 @@ const RoomPage = () => {
                                 NT1 10,000
                             </strong>
                             <button type="button">
-                                <img src={rightArrow} alt="see more" />
+                                <RightArrowIcon />
                             </button>
                         </div>
                     </div>
