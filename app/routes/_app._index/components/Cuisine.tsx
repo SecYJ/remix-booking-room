@@ -1,5 +1,5 @@
 import useEmblaCarousel from "embla-carousel-react";
-import { cuisineData } from "./data";
+import { cuisineData } from "../data";
 
 const Cuisine = () => {
     const [emblaRef] = useEmblaCarousel();

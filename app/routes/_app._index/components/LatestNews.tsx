@@ -1,4 +1,4 @@
-import { newsData } from "./data";
+import { newsData } from "../data";
 
 const LatestNews = () => {
     return (

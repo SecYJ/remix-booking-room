@@ -21,4 +21,9 @@ export default defineConfig({
         port: 8080,
         open: true,
     },
+    resolve: {
+        alias: {
+            "~": "/app",
+        },
+    },
 });
