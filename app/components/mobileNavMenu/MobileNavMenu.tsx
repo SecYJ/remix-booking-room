@@ -10,7 +10,7 @@ interface Props {
 
 const MobileNavMenu = ({ onClose }: Props) => {
     return createPortal(
-        <div className="fixed inset-0 grid items-center bg-neutral-bg px-5">
+        <div className="fixed inset-0 z-50 grid items-center bg-neutral-bg px-5">
             <button
                 type="button"
                 className="absolute right-10 top-10"

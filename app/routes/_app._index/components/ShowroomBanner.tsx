@@ -1,9 +1,8 @@
-import { useEffect, useState } from "react";
 import Autoplay from "embla-carousel-autoplay";
-import useEmblaCarousel from "embla-carousel-react";
+import { cn } from "utils/cn";
+import { useCarousel } from "~/hooks/useCarousel";
 import ChevronLeftIcon from "~/icons/chevronLeft.svg?react";
 import ChevronRightIcon from "~/icons/chevronRight.svg?react";
-import { cn } from "utils/cn";
 
 const imageSlides = [
     "/assets/mobile/room1.png",
@@ -14,41 +13,20 @@ const imageSlides = [
 ];
 
 const ShowroomBanner = () => {
-    const [selectedIndex, setSelectedIndex] = useState(0);
-    const [emblaRef, embla] = useEmblaCarousel({ loop: true }, [
-        Autoplay({ delay: 3000, stopOnInteraction: false, playOnInit: true }),
-    ]);
-
-    const onSlideChange = (direction: "prev" | "next") => {
-        const firstSlide = selectedIndex === 0;
-        const lastSlide = selectedIndex === imageSlides.length - 1;
-
-        embla?.reInit();
-
-        if (direction === "prev") {
-            const index = firstSlide
-                ? imageSlides.length - 1
-                : selectedIndex - 1;
-
-            embla?.scrollTo(index);
-
-            setSelectedIndex(index);
-            return;
-        }
-
-        const index = lastSlide ? 0 : selectedIndex + 1;
-        embla?.scrollTo(index);
-        setSelectedIndex(index);
-    };
-
-    useEffect(() => {
-        if (!embla) return;
-
-        embla.on("select", (e) => setSelectedIndex(e.selectedScrollSnap()));
-    }, [embla]);
+    const { ref, selectedIndex, onNextChange, onPrevChange, scrollTo } =
+        useCarousel({
+            options: { loop: true },
+            plugins: [
+                Autoplay({
+                    delay: 3000,
+                    stopOnInteraction: false,
+                    playOnInit: true,
+                }),
+            ],
+        });
 
     return (
-        <section className="container relative grid gap-6 overflow-x-hidden pb-20 pt-[200px] lg:grid-cols-2 lg:gap-20 lg:pb-[120px]">
+        <section className="container relative grid gap-6 overflow-x-hidden pb-20 pt-[200px] lg:grid-cols-2 lg:gap-20 lg:pb-30">
             {/* NOTE: for mobile only */}
             <img
                 className="absolute -right-20 top-24 h-20 lg:hidden"
@@ -56,11 +34,13 @@ const ShowroomBanner = () => {
                 alt="deco line"
             />
 
-            <div className="relative z-[1] overflow-hidden" ref={emblaRef}>
-                <div className="flex *:min-h-[300px] *:w-full *:shrink-0">
-                    {imageSlides.map((src) => (
-                        <img key={src} src={src} alt="" />
-                    ))}
+            <div className="relative z-10">
+                <div className="overflow-hidden" ref={ref}>
+                    <div className="flex *:min-h-[300px] *:w-full *:shrink-0">
+                        {imageSlides.map((src) => (
+                            <img key={src} src={src} alt="" />
+                        ))}
+                    </div>
                 </div>
 
                 {/* dot */}
@@ -75,7 +55,7 @@ const ShowroomBanner = () => {
                                     ? "w-15 bg-primary-100"
                                     : "w-8 bg-primary-40",
                             )}
-                            onClick={() => embla?.scrollTo(index)}
+                            onClick={() => scrollTo(index)}
                         />
                     ))}
                 </div>
@@ -107,10 +87,10 @@ const ShowroomBanner = () => {
                     <span className="h-px w-20 bg-black" />
                 </button>
                 <div className="mt-11 flex justify-end gap-10">
-                    <button type="button" onClick={() => onSlideChange("prev")}>
+                    <button type="button" onClick={onPrevChange}>
                         <ChevronLeftIcon />
                     </button>
-                    <button type="button" onClick={() => onSlideChange("next")}>
+                    <button type="button" onClick={onNextChange}>
                         <ChevronRightIcon />
                     </button>
                 </div>

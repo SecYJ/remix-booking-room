@@ -1,40 +1,41 @@
-import { useEffect, useState } from "react";
-import useEmblaCarousel from "embla-carousel-react";
 import { IoMdResize } from "react-icons/io";
-import { IoPersonSharp } from "react-icons/io5";
+import {
+    IoChevronBackSharp,
+    IoChevronForwardSharp,
+    IoPersonSharp,
+} from "react-icons/io5";
 import { MdKingBed } from "react-icons/md";
-import RightArrowIcon from "~/icons/right-arrow.svg?react";
 import { cn } from "utils/cn";
+import { useCarousel } from "~/hooks/useCarousel";
+import RightArrowIcon from "~/icons/right-arrow.svg?react";
 import { RoomType } from "../data";
 
 const RoomCard = ({ room }: { room: RoomType }) => {
-    const [emblaRef, embla] = useEmblaCarousel({ loop: true });
-    const [selectedIdx, setSelectedIdx] = useState(0);
-
-    useEffect(() => {
-        if (!embla) return;
-        embla.on("select", (emb) => setSelectedIdx(emb.selectedScrollSnap()));
-    }, [embla]);
+    const { selectedIndex, scrollTo, ref, onNextChange, onPrevChange } =
+        useCarousel({ options: { loop: true } });
 
     return (
-        <figure className="overflow-hidden rounded-[1.25rem]">
+        <figure className="overflow-hidden rounded-[1.25rem] lg:grid lg:grid-cols-[1.5fr_1fr]">
             {/* NOTE: img here */}
-            <div className="relative overflow-hidden" ref={emblaRef}>
-                <div className="flex *:h-[200px] *:w-full *:shrink-0">
-                    {room.gallery.map((img) => (
-                        <img src={img} key={img} alt={img} />
-                    ))}
+            <div className="relative">
+                <div className="h-full overflow-hidden" ref={ref}>
+                    <div className="flex h-full *:h-[200px] *:w-full *:shrink-0 lg:*:h-full">
+                        {room.gallery.map((img) => (
+                            <img src={img} key={img} alt={img} />
+                        ))}
+                    </div>
                 </div>
+
                 {/* NOTE: thumbnails */}
                 <ul className="absolute bottom-6 left-1/2 flex -translate-x-1/2 gap-2">
-                    {embla?.scrollSnapList().map((_, idx) => (
+                    {room.gallery.map((_, idx) => (
                         <li key={idx}>
                             <button
                                 type="button"
-                                onClick={() => embla?.scrollTo(idx)}
+                                onClick={() => scrollTo(idx)}
                                 className={cn(
                                     "h-1 rounded-full",
-                                    selectedIdx === idx
+                                    selectedIndex === idx
                                         ? "w-15 bg-primary-100"
                                         : "w-8 bg-primary-40",
                                 )}
@@ -42,13 +43,29 @@ const RoomCard = ({ room }: { room: RoomType }) => {
                         </li>
                     ))}
                 </ul>
+                <div className="absolute left-6 right-6 top-1/2 hidden -translate-y-1/2 justify-between lg:flex">
+                    <button
+                        type="button"
+                        className="grid size-14 place-items-center rounded-full bg-white"
+                        onClick={onPrevChange}
+                    >
+                        <IoChevronBackSharp className="size-6 text-neutral-80" />
+                    </button>
+                    <button
+                        type="button"
+                        className="grid size-14 place-items-center rounded-full bg-white"
+                        onClick={onNextChange}
+                    >
+                        <IoChevronForwardSharp className="size-6 text-neutral-80" />
+                    </button>
+                </div>
             </div>
-            <div className="space-y-6 bg-white p-4">
+            <div className="space-y-6 bg-white p-4 lg:space-y-10 lg:p-10">
                 <div>
-                    <figcaption className="text-[1.75rem] font-bold text-black">
+                    <figcaption className="mb-2 text-[1.75rem] font-bold text-black lg:text-[2.5rem]">
                         {room.roomName}
                     </figcaption>
-                    <p className="text-sm font-medium text-neutral-80">
+                    <p className="text-sm font-medium text-neutral-80 lg:text-base">
                         {room.roomDescription}
                     </p>
                 </div>
@@ -75,7 +92,7 @@ const RoomCard = ({ room }: { room: RoomType }) => {
                 </ul>
                 <div className="deco-line h-0.5" />
                 <div className="flex justify-between">
-                    <strong className="font-bold text-primary-100">
+                    <strong className="font-bold text-primary-100 lg:text-2xl">
                         NT$ {room.price}
                     </strong>
                     <button>

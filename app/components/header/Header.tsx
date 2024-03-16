@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "@remix-run/react";
 import HeaderNameIcon from "~/icons/hotelName.svg?react";
 import HeaderSlogan from "~/icons/hotelSlogan.svg?react";
@@ -8,9 +8,13 @@ import { MobileNavMenu } from "~/components";
 const Header = () => {
     const [menuVisible, setMenuVisible] = useState(false);
 
+    useEffect(() => {
+        document.body.style.overflow = menuVisible ? "hidden" : "";
+    }, [menuVisible]);
+
     return (
-        <>
-            <header className="container fixed left-0 right-0 top-0 z-10 flex justify-between py-4">
+        <header className="sticky top-0 z-40 bg-neutral-bg">
+            <nav className="container flex justify-between  py-4">
                 <Link to="/">
                     <HeaderNameIcon />
                     <HeaderSlogan />
@@ -18,11 +22,11 @@ const Header = () => {
                 <button type="button" onClick={() => setMenuVisible(true)}>
                     <img src={hamburger} alt="" />
                 </button>
-            </header>
+            </nav>
             {menuVisible && (
                 <MobileNavMenu onClose={() => setMenuVisible(false)} />
             )}
-        </>
+        </header>
     );
 };
 

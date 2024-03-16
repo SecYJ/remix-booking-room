@@ -2,7 +2,7 @@ import { newsData } from "../data";
 
 const LatestNews = () => {
     return (
-        <section className="relative mt-10 bg-primary-10 py-20">
+        <section className="relative bg-primary-10 py-20">
             <img
                 src="/assets/mobile/dot.png"
                 className="absolute right-6 top-10 size-[100px] lg:top-[100px]"
