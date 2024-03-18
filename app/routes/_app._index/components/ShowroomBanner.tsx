@@ -1,5 +1,5 @@
 import Autoplay from "embla-carousel-autoplay";
-import { cn } from "utils/cn";
+import Thumbnails from "~/components/carousel/Thumbnails";
 import { useCarousel } from "~/hooks/useCarousel";
 import ChevronLeftIcon from "~/icons/chevronLeft.svg?react";
 import ChevronRightIcon from "~/icons/chevronRight.svg?react";
@@ -45,19 +45,11 @@ const ShowroomBanner = () => {
 
                 {/* dot */}
                 <div className="absolute bottom-4 left-1/2 flex -translate-x-1/2 gap-2">
-                    {imageSlides.map((_, index) => (
-                        <button
-                            type="button"
-                            key={index}
-                            className={cn(
-                                "h-1 rounded-full",
-                                selectedIndex === index
-                                    ? "w-15 bg-primary-100"
-                                    : "w-8 bg-primary-40",
-                            )}
-                            onClick={() => scrollTo(index)}
-                        />
-                    ))}
+                    <Thumbnails
+                        length={imageSlides.length}
+                        onSelect={(idx: number) => scrollTo(idx)}
+                        selectedIndex={selectedIndex}
+                    />
                 </div>
             </div>
 

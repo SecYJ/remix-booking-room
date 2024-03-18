@@ -1,14 +1,9 @@
-import { IoMdResize } from "react-icons/io";
-import {
-    IoChevronBackSharp,
-    IoChevronForwardSharp,
-    IoPersonSharp,
-} from "react-icons/io5";
-import { MdKingBed } from "react-icons/md";
-import { cn } from "utils/cn";
+import Thumbnails from "~/components/carousel/Thumbnails";
+import BaseDataGrid from "~/components/room/BaseDataGrid";
 import { useCarousel } from "~/hooks/useCarousel";
 import RightArrowIcon from "~/icons/right-arrow.svg?react";
 import { RoomType } from "../data";
+import CarouselButton from "./CarouselButton";
 
 const RoomCard = ({ room }: { room: RoomType }) => {
     const { selectedIndex, scrollTo, ref, onNextChange, onPrevChange } =
@@ -27,37 +22,19 @@ const RoomCard = ({ room }: { room: RoomType }) => {
                 </div>
 
                 {/* NOTE: thumbnails */}
-                <ul className="absolute bottom-6 left-1/2 flex -translate-x-1/2 gap-2">
-                    {room.gallery.map((_, idx) => (
-                        <li key={idx}>
-                            <button
-                                type="button"
-                                onClick={() => scrollTo(idx)}
-                                className={cn(
-                                    "h-1 rounded-full",
-                                    selectedIndex === idx
-                                        ? "w-15 bg-primary-100"
-                                        : "w-8 bg-primary-40",
-                                )}
-                            />
-                        </li>
-                    ))}
-                </ul>
+                <div className="absolute bottom-6 left-1/2 -translate-x-1/2 ">
+                    <Thumbnails
+                        length={room.gallery.length}
+                        onSelect={(idx: number) => scrollTo(idx)}
+                        selectedIndex={selectedIndex}
+                    />
+                </div>
                 <div className="absolute left-6 right-6 top-1/2 hidden -translate-y-1/2 justify-between lg:flex">
-                    <button
-                        type="button"
-                        className="grid size-14 place-items-center rounded-full bg-white"
-                        onClick={onPrevChange}
-                    >
-                        <IoChevronBackSharp className="size-6 text-neutral-80" />
-                    </button>
-                    <button
-                        type="button"
-                        className="grid size-14 place-items-center rounded-full bg-white"
+                    <CarouselButton orientation="back" onClick={onPrevChange} />
+                    <CarouselButton
+                        orientation="forward"
                         onClick={onNextChange}
-                    >
-                        <IoChevronForwardSharp className="size-6 text-neutral-80" />
-                    </button>
+                    />
                 </div>
             </div>
             <div className="space-y-6 bg-white p-4 lg:space-y-10 lg:p-10">
@@ -69,27 +46,15 @@ const RoomCard = ({ room }: { room: RoomType }) => {
                         {room.roomDescription}
                     </p>
                 </div>
-                <ul className="flex gap-4">
-                    {room.features.map((feature, index) => (
-                        <li
-                            className="grid size-24 content-between rounded-lg border border-primary-40 px-4 py-5"
-                            key={index}
-                        >
-                            {index === 0 && (
-                                <IoMdResize className="size-6 rounded bg-primary-100 p-1 text-white" />
-                            )}
-                            {index === 1 && (
-                                <MdKingBed className="size-6 rounded bg-primary-100 p-1 text-white" />
-                            )}
-                            {index === 2 && (
-                                <IoPersonSharp className="size-6 rounded bg-primary-100 p-1 text-white" />
-                            )}
-                            <div className="font-bold text-neutral-80">
-                                {feature}
-                            </div>
-                        </li>
-                    ))}
-                </ul>
+
+                <BaseDataGrid
+                    data={[
+                        room.features[0],
+                        room.features[1],
+                        room.features[2],
+                    ]}
+                />
+
                 <div className="deco-line h-0.5" />
                 <div className="flex justify-between">
                     <strong className="font-bold text-primary-100 lg:text-2xl">
