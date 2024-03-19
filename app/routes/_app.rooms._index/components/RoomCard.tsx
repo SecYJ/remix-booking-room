@@ -1,6 +1,6 @@
 import Thumbnails from "~/components/carousel/Thumbnails";
 import BaseDataGrid from "~/components/room/BaseDataGrid";
-import { useCarousel } from "~/hooks/useCarousel";
+import { useCarousel } from "~/hooks";
 import RightArrowIcon from "~/icons/right-arrow.svg?react";
 import { RoomType } from "../data";
 import CarouselButton from "./CarouselButton";

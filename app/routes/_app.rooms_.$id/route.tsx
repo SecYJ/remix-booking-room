@@ -1,12 +1,12 @@
-import MobileCarousel from "./components/MobileCarousel";
+import RoomGallery from "./components/RoomGallery";
 import RoomOverview from "./components/RoomOverview";
 
 const RoomPage = () => {
     return (
-        <div>
-            <MobileCarousel />
+        <>
+            <RoomGallery />
             <RoomOverview />
-        </div>
+        </>
     );
 };
 

@@ -1,6 +1,6 @@
 import Autoplay from "embla-carousel-autoplay";
 import Thumbnails from "~/components/carousel/Thumbnails";
-import { useCarousel } from "~/hooks/useCarousel";
+import { useCarousel } from "~/hooks";
 import ChevronLeftIcon from "~/icons/chevronLeft.svg?react";
 import ChevronRightIcon from "~/icons/chevronRight.svg?react";
 

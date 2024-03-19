@@ -11,7 +11,7 @@ interface CarouselConfig {
     plugins?: EmblaPluginType[];
 }
 
-export const useCarousel = ({ options, plugins }: CarouselConfig) => {
+const useCarousel = ({ options, plugins }: CarouselConfig) => {
     const [selectedIndex, setSelectedIndex] = useState(0);
     const [emblaRef, embla] = useEmblaCarousel(options, plugins);
 
@@ -43,3 +43,5 @@ export const useCarousel = ({ options, plugins }: CarouselConfig) => {
         scrollTo,
     };
 };
+
+export default useCarousel;

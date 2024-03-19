@@ -1,9 +1,10 @@
 import { PropsWithChildren } from "react";
 import { IoCheckmarkSharp } from "react-icons/io5";
+import { cn } from "utils/cn";
 
 interface Props {
     title: string;
-    column?: number;
+    column?: 2 | 3;
     list?: string[];
 }
 
@@ -23,7 +24,15 @@ const RoomSection = ({
             {children ? (
                 children
             ) : (
-                <ul className="rounded-lg bg-white p-6">
+                <ul
+                    className={cn(
+                        "grid rounded-lg bg-white p-6 lg:grid-cols-[repeat(4,auto)_1fr] lg:gap-10",
+                        {
+                            "grid-cols-[auto_1fr] gap-10": column === 2,
+                            "grid-cols-3 gap-6": column === 3,
+                        },
+                    )}
+                >
                     {list?.map((item) => (
                         <li key={item} className="flex items-center gap-2">
                             <IoCheckmarkSharp className="size-6 text-primary-100" />

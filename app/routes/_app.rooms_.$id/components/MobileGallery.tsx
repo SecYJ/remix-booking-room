@@ -1,10 +1,10 @@
 import Thumbnails from "~/components/carousel/Thumbnails";
-import { useCarousel } from "~/hooks/useCarousel";
+import { useCarousel } from "~/hooks";
 import { rooms } from "~/routes/_app.rooms._index/data";
 
 const temp = rooms[0].gallery.length;
 
-const MobileCarousel = () => {
+const MobileGallery = () => {
     const { ref, scrollTo, selectedIndex } = useCarousel({
         options: { loop: true },
     });
@@ -40,4 +40,4 @@ const MobileCarousel = () => {
     );
 };
 
-export default MobileCarousel;
+export default MobileGallery;
