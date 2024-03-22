@@ -38,7 +38,7 @@ const RoomOverview = () => {
                     </RoomSection>
                 </div>
 
-                <aside className="sticky top-20 h-fit lg:col-span-full lg:col-start-9">
+                <aside className="sticky hidden lg:block top-20 h-fit lg:col-span-full lg:col-start-9">
                     <div className="space-y-10 rounded-[1.25rem] bg-white p-10">
                         <p className="border-b border-neutral-40 pb-4 text-2xl text-black">
                             預訂房型
