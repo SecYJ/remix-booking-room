@@ -1,6 +1,21 @@
 import { Form, Link } from "@remix-run/react";
 import line from "/assets/desktop/line3.png";
 import authBg from "/assets/desktop/register.png";
+import { ActionFunctionArgs } from "@remix-run/node";
+import axios from "axios";
+
+export const action = async ({ request }: ActionFunctionArgs) => {
+    const form = await request.formData();
+    const email = form.get("email");
+    const password = form.get("password");
+
+    const res = await axios.get(
+        "https://fork-hotel-api.onrender.com/api/v1/rooms",
+    );
+    console.log(res.data);
+
+    return null;
+};
 
 const LoginPage = () => {
     return (
@@ -23,20 +38,24 @@ const LoginPage = () => {
                         <h1 className="text-3xl">立即開始旅程</h1>
                     </div>
 
-                    <Form className="mt-10">
+                    <Form method="POST" className="mt-10">
                         <div className="space-y-4 *:grid *:auto-rows-auto *:gap-2 [&_input]:rounded-lg [&_input]:p-4 [&_input]:text-sm [&_input]:font-medium [&_input]:placeholder-neutral-60 [&_label]:text-sm">
                             <div>
                                 <label htmlFor="email">電子信箱</label>
                                 <input
                                     type="text"
+                                    name="email"
                                     placeholder="請輸入電子信箱"
+                                    className="text-black"
                                 />
                             </div>
                             <div>
                                 <label htmlFor="email">密碼</label>
                                 <input
                                     type="password"
+                                    name="password"
                                     placeholder="請輸入密碼"
+                                    className="text-black"
                                 />
                             </div>
                         </div>

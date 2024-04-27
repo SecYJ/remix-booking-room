@@ -1,5 +1,13 @@
 {
-    "include": ["env.d.ts", "**/*.ts", "**/*.tsx"],
+    "include": [
+        "env.d.ts",
+        "**/*.ts",
+        "**/*.tsx",
+        "**/.server/**/*.ts",
+        "**/.server/**/*.tsx",
+        "**/.client/**/*.ts",
+        "**/.client/**/*.tsx",
+    ],
     "skipLibCheck": true,
     "compilerOptions": {
         "lib": ["DOM", "DOM.Iterable", "ES2022"],
@@ -13,9 +21,9 @@
         "strict": true,
         "allowJs": true,
         "forceConsistentCasingInFileNames": true,
-        "baseUrl": "./",
+        "baseUrl": ".",
         "paths": {
-            "~/*": ["./app/*"],
+            "~/*": ["app/*"],
             "/*": ["./public/*"],
         },
 

@@ -16,6 +16,7 @@
         "@remix-run/node": "^2.8.0",
         "@remix-run/react": "^2.8.0",
         "@remix-run/serve": "^2.8.0",
+        "axios": "^1.6.8",
         "clsx": "^2.1.0",
         "embla-carousel-autoplay": "8.0.0",
         "embla-carousel-react": "8.0.0",

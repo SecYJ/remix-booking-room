@@ -1,5 +1,5 @@
 import { PropsWithChildren } from "react";
-import { cn } from "utils/cn";
+import { cn } from "~/utils/cn";
 
 interface BannerProps {
     gap: string;
@@ -19,7 +19,7 @@ const Banner = ({ children, gap }: PropsWithChildren<BannerProps>) => {
                 <source srcSet="/assets/mobile/banner.png" />
                 <img
                     src="/assets/mobile/banner.png"
-                    className="min-h-[calc(100vh-3.75rem)] opacity-80"
+                    className="min-h-[calc(100vh-3.75rem)] w-full opacity-80"
                     alt=""
                 />
             </picture>

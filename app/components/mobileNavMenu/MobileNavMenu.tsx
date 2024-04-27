@@ -1,14 +1,10 @@
 import { createPortal } from "react-dom";
 import { NavLink } from "@remix-run/react";
-import { navigationLinks } from "./constant";
-import { cn } from "utils/cn";
+import { cn } from "~/utils/cn";
 import CloseIcon from "~/icons/close.svg?react";
+import { NAVIGATION_LINKS } from "~/constants/navigation.ts/navigation";
 
-interface Props {
-    onClose: () => void;
-}
-
-const MobileNavMenu = ({ onClose }: Props) => {
+const MobileNavMenu = ({ onClose }: { onClose: () => void }) => {
     return createPortal(
         <div className="fixed inset-0 z-50 grid items-center bg-neutral-bg px-5">
             <button
@@ -21,7 +17,7 @@ const MobileNavMenu = ({ onClose }: Props) => {
             </button>
             <nav>
                 <ul className="space-y-8 text-center font-bold">
-                    {navigationLinks.map((option) => (
+                    {NAVIGATION_LINKS.map((option) => (
                         <li key={option.label}>
                             <NavLink
                                 className={({ isActive }) =>

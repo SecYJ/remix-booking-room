@@ -1,6 +1,6 @@
 import { PropsWithChildren } from "react";
 import { IoCheckmarkSharp } from "react-icons/io5";
-import { cn } from "utils/cn";
+import { cn } from "~/utils/cn";
 
 interface Props {
     title: string;
