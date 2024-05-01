@@ -58,3 +58,18 @@ export const REGISTER_STEP_TWO_SCHEMA = z.object({
     }),
     agreeTerm: z.boolean(),
 });
+
+export const LOGIN_SCHEMA = z.object({
+    email: z
+        .string({
+            required_error: "電子信箱為必填項",
+        })
+        .email("電子信箱格式錯誤"),
+    password: z
+        .string({
+            required_error: "密碼為必填項",
+        })
+        .min(8, "密碼長度至少為 8 個字元")
+        .max(24, "密碼長度不得超過 24 個字元")
+        .regex(/[A-Za-z0-9]/, "密碼只能包含英文及數字"),
+});

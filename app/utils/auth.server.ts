@@ -1,4 +1,4 @@
-import { createCookieSessionStorage } from "@remix-run/node";
+import { createCookieSessionStorage, redirect } from "@remix-run/node";
 import { tokenSession } from "./token.server";
 
 interface RegisterData {
@@ -36,5 +36,15 @@ export const getRegisterFormData = async (request: Request) => {
 export const getUser = async (request: Request) => {
     const user = await tokenSession.getSession(request.headers.get("Cookie"));
 
-    return user.get("token");
+    return user;
+};
+
+export const requireUser = async (request: Request) => {
+    const user = await getUser(request);
+
+    if (!user) {
+        return redirect("/login");
+    }
+
+    return user;
 };
