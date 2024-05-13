@@ -1,7 +1,7 @@
-import { useForm } from "@conform-to/react";
-import { parseWithZod } from "@conform-to/zod";
+import { getFormProps, getInputProps, useForm } from "@conform-to/react";
+import { getZodConstraint, parseWithZod } from "@conform-to/zod";
 import { ActionFunctionArgs, json, redirect } from "@remix-run/node";
-import { Form } from "@remix-run/react";
+import { Form, useActionData } from "@remix-run/react";
 import Input from "~/components/form/Input";
 import { verifyEmail } from "~/services/verify/verifyEmail";
 import { registerSession } from "~/utils/auth.server";
@@ -15,7 +15,10 @@ export const action = async ({ request }: ActionFunctionArgs) => {
     });
 
     if (submission.status !== "success") {
-        return submission.reply();
+        return json({
+            type: "form",
+            results: submission.reply(),
+        } as const);
     }
 
     const verifyEmailResult = await verifyEmail(submission.value.email);
@@ -24,7 +27,9 @@ export const action = async ({ request }: ActionFunctionArgs) => {
         verifyEmailResult.status === true &&
         verifyEmailResult.result.isEmailExists
     ) {
-        return json({ message: "Email 已被使用" }, { status: 400 });
+        return json({ type: "email", message: "Email 已被使用" } as const, {
+            status: 400,
+        });
     }
 
     const session = await registerSession.getSession();
@@ -40,12 +45,19 @@ export const action = async ({ request }: ActionFunctionArgs) => {
 };
 
 const RegisterPage = () => {
-    // const lastResult = useActionData<typeof action>();
-    // console.log(lastResult);
+    const actionData = useActionData<typeof action>();
+
+    const formError =
+        actionData?.type === "form" ? actionData.results : undefined;
+    const emailError =
+        actionData?.type === "email" ? actionData.message : undefined;
+
     const [form, fields] = useForm({
         shouldValidate: "onBlur",
         shouldRevalidate: "onInput",
-        // lastResult,
+        constraint: getZodConstraint(REGISTER_STEP_ONE_SCHEMA),
+        lastResult: formError,
+        defaultNoValidate: false,
         onValidate({ formData }) {
             return parseWithZod(formData, { schema: REGISTER_STEP_ONE_SCHEMA });
         },
@@ -53,28 +65,27 @@ const RegisterPage = () => {
 
     return (
         <>
-            <Form
-                method="POST"
-                onSubmit={form.onSubmit}
-                id={form.id}
-                className="space-y-4"
-            >
+            <Form method="POST" {...getFormProps(form)} className="space-y-4">
                 <Input
-                    name={fields.email.name}
+                    {...getInputProps(fields.email, {
+                        type: "email",
+                    })}
                     label="電子信箱"
                     placeholder="hello@exsample.com"
-                    errormsg={fields?.email?.errors?.[0]}
+                    errormsg={emailError ?? fields?.email?.errors?.[0]}
                 />
                 <Input
-                    type="password"
-                    name={fields.password.name}
+                    {...getInputProps(fields.password, {
+                        type: "password",
+                    })}
                     label="密碼"
                     placeholder="請輸入密碼"
                     errormsg={fields?.password?.errors?.[0]}
                 />
                 <Input
-                    type="password"
-                    name={fields.confirmPassword.name}
+                    {...getInputProps(fields.confirmPassword, {
+                        type: "password",
+                    })}
                     label="確認密碼"
                     placeholder="請再輸入一次密碼"
                     errormsg={fields?.confirmPassword?.errors?.[0]}

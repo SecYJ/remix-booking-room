@@ -1,8 +1,9 @@
 import { LoaderFunctionArgs } from "@remix-run/node";
 import { Link, Outlet } from "@remix-run/react";
-import { requireUser } from "~/session/guard.server";
+import { requireUser } from "~/utils/auth.server";
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
+    console.log("testing", request.headers.get("Referer"));
     await requireUser(request);
 
     return null;

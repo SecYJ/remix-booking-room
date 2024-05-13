@@ -27,7 +27,9 @@ export const action = async ({ request }: ActionFunctionArgs) => {
     session.set("token", response.token);
     session.set("username", response.result.name);
 
-    return redirect("/", {
+    const originalLocation = request.headers.get("Referer") || "/";
+
+    return redirect(originalLocation, {
         headers: {
             "Set-Cookie": await tokenSession.commitSession(session),
         },

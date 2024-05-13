@@ -5,11 +5,9 @@ import RoomOverview from "./components/RoomOverview";
 import { getSingleRoom } from "~/services/getSingleRoom";
 
 export const loader = async ({ params }: LoaderFunctionArgs) => {
-    const { roomId } = params;
+    const roomData = await getSingleRoom(params.roomId as string);
 
-    if (!roomId) return "";
-
-    const roomData = await getSingleRoom(roomId);
+    console.log("roomData", roomData);
 
     return json({
         status: "success",
@@ -18,9 +16,8 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
 };
 
 const RoomPage = () => {
-    const roomData = useLoaderData<typeof loader>();
+    const { data: roomData} = useLoaderData<typeof loader>();
 
-    console.log(roomData);
 
     return (
         <>

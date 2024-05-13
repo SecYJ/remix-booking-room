@@ -2,6 +2,7 @@ import { FiMinus, FiPlus } from "react-icons/fi";
 import RoomSection from "~/components/room/RoomSection";
 import { amenities, roomEquips, roomSizes, rules } from "../data";
 import { Room } from "~/types/room";
+import FeatureColumn from "~/components/room/FeatureColumn";
 
 const RoomOverview = ({ room }: { room: Room }) => {
     return (
@@ -18,16 +19,25 @@ const RoomOverview = ({ room }: { room: Room }) => {
                     </div>
 
                     <RoomSection title="房型基本資訊">
-                        {/* <BaseDataGrid data={["24坪", "1 張大床", "2-4 人"]} /> */}
+                        <div className="flex gap-4">
+                            <FeatureColumn
+                                feature="areaInfo"
+                                text={room.areaInfo}
+                            />
+                            <FeatureColumn
+                                feature="bedInfo"
+                                text={room.bedInfo}
+                            />
+                            <FeatureColumn
+                                feature="maxPeople"
+                                text={`1-${room.maxPeople}人`}
+                            />
+                        </div>
                     </RoomSection>
 
-                    <RoomSection title="房間格局" column={3} list={roomSizes} />
-                    <RoomSection
-                        title="房內設備"
-                        column={2}
-                        list={roomEquips}
-                    />
-                    <RoomSection title="備品提供" column={2} list={amenities} />
+                    <RoomSection title="房間格局" list={roomSizes} />
+                    <RoomSection title="房內設備" list={roomEquips} />
+                    <RoomSection title="備品提供" list={amenities} />
 
                     <RoomSection title="訂房須知">
                         <ol className="list-decimal space-y-1 pl-5 font-medium text-neutral-80">
