@@ -1,17 +1,12 @@
-import {
-    Form,
-    Link,
-    useLoaderData,
-    useRouteLoaderData,
-} from "@remix-run/react";
+import { Form, Link, useRouteLoaderData } from "@remix-run/react";
 import { useEffect, useState } from "react";
 import { IoPersonCircleOutline } from "react-icons/io5";
 import { MobileNavMenu } from "~/components";
 import hamburger from "~/icons/hamburger.svg";
 import HeaderNameIcon from "~/icons/hotelName.svg?react";
 import HeaderSlogan from "~/icons/hotelSlogan.svg?react";
-import { cn } from "~/utils/cn";
 import { loader as rootLoader } from "~/root";
+import { cn } from "~/utils/cn";
 
 const Header = ({ withBg = false }: { withBg?: boolean }) => {
     const data = useRouteLoaderData<typeof rootLoader>("root");
@@ -42,13 +37,13 @@ const Header = ({ withBg = false }: { withBg?: boolean }) => {
                 {/* NOTE: for desktop */}
                 <ul className="hidden lg:flex lg:gap-12">
                     <li>
-                        <Link to="/" className="text-base font-bold">
+                        <Link to="/rooms" className="text-base font-bold">
                             客房旅宿
                         </Link>
                     </li>
 
                     <li className="relative">
-                        {data?.username ? (
+                        {data?.name ? (
                             <button
                                 type="button"
                                 className="flex items-center gap-2"
@@ -58,7 +53,7 @@ const Header = ({ withBg = false }: { withBg?: boolean }) => {
                             >
                                 <IoPersonCircleOutline size={24} />
                                 <span className="text-base font-bold">
-                                    {data.username}
+                                    {data.name}
                                 </span>
                             </button>
                         ) : (

@@ -20,12 +20,14 @@ export const BASIC_INFO_SCHEMA = z.object({
             message: "手機號碼格式錯誤",
         })
         .optional(),
-    birthYear: z.coerce.number().int().positive(),
-    birthMonth: z.coerce.number().int().positive(),
-    birthDay: z.coerce.number().int().positive(),
-    state: z.string(),
-    city: z.string(),
-    address: z.string({
-        required_error: "地址為必填項",
-    }),
+    birthYear: z.coerce.number().int().positive().optional(),
+    birthMonth: z.coerce.number().int().positive().optional(),
+    birthDay: z.coerce.number().int().positive().optional(),
+    state: z.string().optional(),
+    city: z.string().optional(),
+    address: z
+        .string({
+            required_error: "地址為必填項",
+        })
+        .optional(),
 });

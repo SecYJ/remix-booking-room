@@ -1,10 +1,17 @@
 import { FiMinus, FiPlus } from "react-icons/fi";
-import RoomSection from "~/components/room/RoomSection";
-import { amenities, roomEquips, roomSizes, rules } from "../data";
-import { Room } from "~/types/room";
 import FeatureColumn from "~/components/room/FeatureColumn";
+import RoomSection from "~/components/room/RoomSection";
+import { ProvidedItem, Room } from "~/types/room";
+import { rules } from "../data";
+
+const mapping = (array: ProvidedItem[]) =>
+    array.filter((item) => item.isProvide).map((item) => item.title);
 
 const RoomOverview = ({ room }: { room: Room }) => {
+    const layoutInfo = mapping(room.layoutInfo);
+    const facilityInfo = mapping(room.facilityInfo);
+    const amenityInfo = mapping(room.amenityInfo);
+
     return (
         <section className="bg-primary-10 py-10 lg:py-30">
             <div className="container lg:grid lg:grid-cols-12">
@@ -35,9 +42,9 @@ const RoomOverview = ({ room }: { room: Room }) => {
                         </div>
                     </RoomSection>
 
-                    <RoomSection title="房間格局" list={roomSizes} />
-                    <RoomSection title="房內設備" list={roomEquips} />
-                    <RoomSection title="備品提供" list={amenities} />
+                    <RoomSection title="房間格局" list={layoutInfo} />
+                    <RoomSection title="房內設備" list={facilityInfo} />
+                    <RoomSection title="備品提供" list={amenityInfo} />
 
                     <RoomSection title="訂房須知">
                         <ol className="list-decimal space-y-1 pl-5 font-medium text-neutral-80">
@@ -96,7 +103,7 @@ const RoomOverview = ({ room }: { room: Room }) => {
                         </div>
 
                         <strong className="text-2xl text-primary-100">
-                            NT$ 10,000
+                            NT$ {room.price}
                         </strong>
 
                         <button

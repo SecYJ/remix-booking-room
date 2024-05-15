@@ -1,7 +1,7 @@
 import useEmblaCarousel from "embla-carousel-react";
-import { cuisineData } from "../data";
+import { CulinaryResponse } from "../type";
 
-const Cuisine = () => {
+const Cuisine = ({ culinaries }: { culinaries: CulinaryResponse[] }) => {
     const [emblaRef] = useEmblaCarousel();
 
     return (
@@ -21,22 +21,25 @@ const Cuisine = () => {
                 </div>
                 <div className="overflow-hidden" ref={emblaRef}>
                     <div className="flex gap-6">
-                        {cuisineData.map((cuisine) => (
+                        {culinaries.map((culinary) => (
                             <figure
                                 className="relative w-[300px] shrink-0 overflow-hidden rounded-lg lg:w-[415px]"
-                                key={cuisine.name}
+                                key={culinary._id}
                             >
-                                <img src={cuisine.img} alt={cuisine.name} />
+                                <img
+                                    src={culinary.image}
+                                    loading="lazy"
+                                    alt={culinary.title}
+                                />
                                 <div className="absolute bottom-0 grid grid-cols-[1fr_auto] items-center bg-transparent bg-gradient-to-b from-black/0 to-neutral-bg p-6">
                                     <figcaption className="text-2xl font-bold">
-                                        {cuisine.name}
+                                        {culinary.title}
                                     </figcaption>
                                     <div className="flex items-center gap-2 text-sm font-bold text-neutral-40 lg:text-base">
-                                        <span>{cuisine.availableDay}</span>
-                                        <span>{cuisine.availableTime}</span>
+                                        <span>{culinary.diningTime}</span>
                                     </div>
                                     <p className="col-span-full mt-4 text-xs font-medium lg:text-base">
-                                        {cuisine.description}
+                                        {culinary.description}
                                     </p>
                                 </div>
                             </figure>

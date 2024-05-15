@@ -1,15 +1,16 @@
 import { LoaderFunctionArgs } from "@remix-run/node";
-import { Link, Outlet } from "@remix-run/react";
+import { Link, Outlet, useRouteLoaderData } from "@remix-run/react";
 import { requireUser } from "~/utils/auth.server";
+import { loader as rootLoader } from "~/root";
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
-    console.log("testing", request.headers.get("Referer"));
     await requireUser(request);
-
     return null;
 };
 
 const ProfileLayout = () => {
+    const user = useRouteLoaderData<typeof rootLoader>("root");
+
     return (
         <div>
             <div className="relative h-[206px] lg:h-[384px]">
@@ -26,7 +27,7 @@ const ProfileLayout = () => {
                             alt="icon"
                         />
                         <h1 className="text-3xl font-bold lg:text-5xl">
-                            Hello, Jessica
+                            Hello, {user?.name}
                         </h1>
                     </div>
                 </div>

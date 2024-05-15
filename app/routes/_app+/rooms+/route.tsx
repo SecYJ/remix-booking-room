@@ -8,7 +8,6 @@ export const loader = async () => {
     const roomsData = await getRooms();
 
     return json({
-        status: "success",
         data: roomsData.result,
     });
 };
@@ -35,6 +34,16 @@ const RoomIndex = () => {
                     </div>
 
                     <div className="mt-10 space-y-6 lg:mt-20 lg:space-y-12">
+                        {/* <Suspense fallback={<p>Loading...</p>}>
+                            <Await resolve={roomsData}>
+                                {(roomsData) =>
+                                    roomsData.result.map((room) => (
+                                        <RoomCard room={room} key={room._id} />
+                                    ))
+                                }
+                            </Await>
+                        </Suspense> */}
+
                         {roomsData.map((room) => (
                             <RoomCard room={room} key={room._id} />
                         ))}

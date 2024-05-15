@@ -1,25 +1,40 @@
-import { InputHTMLAttributes, forwardRef } from "react";
+import { InputHTMLAttributes } from "react";
+import { cn } from "~/utils/cn";
 
 interface InputType extends InputHTMLAttributes<HTMLInputElement> {
     label?: string;
-    errormsg?: string;
+    labelTextColor?: string;
+    labelBold?: boolean;
+    errorMsg?: string;
 }
 
-const Input = forwardRef<HTMLInputElement, InputType>((props, ref) => {
+const Input = ({
+    label,
+    labelTextColor,
+    labelBold,
+    errorMsg,
+    ...props
+}: InputType) => {
     return (
         <div className="grid">
-            <label htmlFor={props.label} className="text-white">
-                {props.label}
+            <label
+                htmlFor={label}
+                className={cn(
+                    "text-white",
+                    labelTextColor,
+                    labelBold && "font-bold",
+                )}
+            >
+                {label}
             </label>
             <input
-                className="mt-2 rounded-lg bg-white p-4 text-black placeholder-neutral-60"
-                ref={ref}
+                className="mt-2 rounded-lg border border-neutral-40 bg-white p-4 text-black placeholder-neutral-60"
                 {...props}
             />
-            <p className="text-red-400">{props.errormsg}</p>
+            {errorMsg && <p className="text-red-400">{errorMsg}</p>}
         </div>
     );
-});
+};
 
 Input.displayName = "Input";
 

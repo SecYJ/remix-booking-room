@@ -1,4 +1,6 @@
-const DesktopGallery = () => {
+import { cn } from "~/utils/cn";
+
+const DesktopGallery = ({ gallery }: { gallery: string[] }) => {
     return (
         <section className="relative grid max-h-[600px] min-h-[600px] grid-cols-4 grid-rows-2 gap-2 bg-primary-10 p-20 [&_img]:size-full">
             <button
@@ -8,31 +10,22 @@ const DesktopGallery = () => {
                 看更多
             </button>
 
-            <img
-                src="/assets/mobile/room2-1.png"
-                className="col-span-2 row-span-full rounded-bl-[1.25rem] rounded-tl-[1.25rem]"
-                alt=""
-            />
-            <img
-                src="/assets/mobile/room2-2.png"
-                className="col-start-3"
-                alt=""
-            />
-            <img
-                src="/assets/mobile/room2-3.png"
-                className="col-start-4 rounded-tr-[1.25rem]"
-                alt=""
-            />
-            <img
-                src="/assets/mobile/room2-4.png"
-                className="col-start-3 row-start-2"
-                alt=""
-            />
-            <img
-                src="/assets/mobile/room2-5.png"
-                className="col-start-4 row-start-2 rounded-br-[1.25rem]"
-                alt=""
-            />
+            {gallery.map((img, index) => (
+                <img
+                    key={img}
+                    src={img}
+                    className={cn({
+                        "col-span-2 row-span-full rounded-bl-[1.25rem] rounded-tl-[1.25rem]":
+                            index === 0,
+                        "col-start-3": index === 1,
+                        "col-start-4 rounded-tr-[1.25rem]": index === 2,
+                        "col-start-3 row-start-2": index === 3,
+                        "col-start-4 row-start-2 rounded-br-[1.25rem]":
+                            index === 4,
+                    })}
+                    alt={`room-${index + 1}`}
+                />
+            ))}
         </section>
     );
 };

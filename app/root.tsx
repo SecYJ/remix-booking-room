@@ -8,6 +8,7 @@ import {
 } from "@remix-run/react";
 import stylesheet from "~/index.css?url";
 import { tokenSession } from "./utils/token.server";
+import { getUser } from "./services/users/getUser.server";
 
 export const links = () => [{ rel: "stylesheet", href: stylesheet }];
 
@@ -15,7 +16,12 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
     const session = await tokenSession.getSession(
         request.headers.get("Cookie"),
     );
-    return json(session.data);
+
+    if (!session.data.token) return null;
+
+    const user = await getUser(session.data.token);
+
+    return json(user.result);
 };
 
 export default function App() {

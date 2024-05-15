@@ -1,3 +1,8 @@
+export interface ProvidedItem {
+    title: string;
+    isProvide: true;
+}
+
 export interface Room {
     _id: string;
     name: string;
@@ -9,7 +14,7 @@ export interface Room {
     maxPeople: number;
     price: number;
     status: number;
-    layoutInfo: string[];
-    facilityInfo: string[];
-    amenityInfo: string[];
+    layoutInfo: ProvidedItem[];
+    facilityInfo: ProvidedItem[];
+    amenityInfo: ProvidedItem[];
 }

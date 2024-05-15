@@ -72,7 +72,7 @@ const RegisterPage = () => {
                     })}
                     label="電子信箱"
                     placeholder="hello@exsample.com"
-                    errormsg={emailError ?? fields?.email?.errors?.[0]}
+                    errorMsg={emailError ?? fields?.email?.errors?.[0]}
                 />
                 <Input
                     {...getInputProps(fields.password, {
@@ -80,7 +80,7 @@ const RegisterPage = () => {
                     })}
                     label="密碼"
                     placeholder="請輸入密碼"
-                    errormsg={fields?.password?.errors?.[0]}
+                    errorMsg={fields?.password?.errors?.[0]}
                 />
                 <Input
                     {...getInputProps(fields.confirmPassword, {
@@ -88,7 +88,7 @@ const RegisterPage = () => {
                     })}
                     label="確認密碼"
                     placeholder="請再輸入一次密碼"
-                    errormsg={fields?.confirmPassword?.errors?.[0]}
+                    errorMsg={fields?.confirmPassword?.errors?.[0]}
                 />
             </Form>
 

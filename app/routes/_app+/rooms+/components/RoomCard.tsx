@@ -17,7 +17,7 @@ const RoomCard = ({ room }: { room: Room }) => {
                 <div className="h-full overflow-hidden" ref={ref}>
                     <div className="flex h-full *:h-[200px] *:w-full *:shrink-0 lg:*:h-full">
                         {room.imageUrlList.map((img) => (
-                            <img src={img} key={img} alt={img} />
+                            <img src={img} loading="lazy" key={img} alt={img} />
                         ))}
                     </div>
                 </div>
@@ -72,3 +72,4 @@ const RoomCard = ({ room }: { room: Room }) => {
 };
 
 export default RoomCard;
+

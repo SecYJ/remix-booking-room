@@ -2,7 +2,6 @@ import { serverApiClient } from "../axios.config";
 
 interface Response {
     status: boolean;
-    token: string;
     result: {
         address: {
             zipcode: number;
@@ -19,20 +18,11 @@ interface Response {
     };
 }
 
-interface RequestBody {
-    name: string;
-    email: string;
-    password: string;
-    phone: string;
-    birthday: string;
-    address: {
-        zipcode: number;
-        detail: string;
-    };
-}
-
-export const register = async (body: RequestBody) => {
-    const response = await serverApiClient.post<Response>("/user/signup", body);
-
+export const getUser = async (token: string) => {
+    const response = await serverApiClient.get<Response>("/user", {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    });
     return response.data;
 };

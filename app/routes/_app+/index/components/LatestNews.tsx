@@ -1,6 +1,6 @@
-import { newsData } from "../data";
+import { LatestNews, NewsResponse } from "../type";
 
-const LatestNews = () => {
+const LatestNews = ({ news }: { news: NewsResponse[] }) => {
     return (
         <section className="relative bg-primary-10 py-20">
             <img
@@ -15,20 +15,17 @@ const LatestNews = () => {
                     <span className="deco-line mt-6 h-0.5 w-[140px]" />
                 </h2>
                 <ul className="space-y-10 lg:col-span-full lg:col-start-3">
-                    {newsData.map((news) => (
+                    {news.map((news) => (
                         <li key={news.description}>
                             <figure className="flex flex-col lg:flex-row lg:items-center lg:gap-6">
                                 <picture className="shrink-0">
                                     <source
                                         media="(min-width: 1024px)"
-                                        srcSet="/assets/desktop/news1.png"
-                                    />
-                                    <source
-                                        media="(max-width: 1023px)"
-                                        srcSet="/assets/mobile/news1.png"
+                                        srcSet={news.image}
                                     />
                                     <img
                                         src="/assets/mobile/news1.png"
+                                        loading="lazy"
                                         alt="beautiful view"
                                         className="w-full rounded-lg lg:w-[474px]"
                                     />

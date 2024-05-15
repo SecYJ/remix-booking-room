@@ -1,13 +1,11 @@
 import { useLoaderData } from "@remix-run/react";
 import { LoaderFunctionArgs, json } from "@remix-run/node";
-import RoomGallery from "./components/RoomGallery";
 import RoomOverview from "./components/RoomOverview";
 import { getSingleRoom } from "~/services/getSingleRoom";
+import DesktopGallery from "./components/DesktopGallery";
 
 export const loader = async ({ params }: LoaderFunctionArgs) => {
     const roomData = await getSingleRoom(params.roomId as string);
-
-    console.log("roomData", roomData);
 
     return json({
         status: "success",
@@ -16,12 +14,11 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
 };
 
 const RoomPage = () => {
-    const { data: roomData} = useLoaderData<typeof loader>();
-
+    const { data: roomData } = useLoaderData<typeof loader>();
 
     return (
         <>
-            <RoomGallery />
+            <DesktopGallery gallery={roomData.imageUrlList} />
             <RoomOverview room={roomData} />
         </>
     );

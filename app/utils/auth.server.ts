@@ -42,11 +42,12 @@ export const getUser = async (request: Request) => {
 export const requireUser = async (request: Request) => {
     const user = await tokenSession.getSession(request.headers.get("Cookie"));
 
-    console.log("user heree", user.has("token"));
-
-    if (!user.has("token")) {
-        return redirect("/login");
+    if (!user.data.token) {
+        throw redirect("/login");
     }
 
-    return user;
+    return {
+        token: user.get("token"),
+        username: user.get("username"),
+    };
 };

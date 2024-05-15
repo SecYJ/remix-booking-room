@@ -23,13 +23,12 @@ export const action = async ({ request }: ActionFunctionArgs) => {
         submission.payload.password as string,
     );
 
-    console.log("response", response);
     session.set("token", response.token);
     session.set("username", response.result.name);
 
-    const originalLocation = request.headers.get("Referer") || "/";
+    // const originalLocation = request.headers.get("Referer") || "/";
 
-    return redirect(originalLocation, {
+    return redirect("/", {
         headers: {
             "Set-Cookie": await tokenSession.commitSession(session),
         },
